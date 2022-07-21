@@ -3,6 +3,21 @@ plugins {
 }
 
 dependencies {
+    annotationProcessor platform(libs.micronaut.bom)
+    annotationProcessor libs.bundles.micronaut.annotation.processor
+
+    implementation platform(libs.micronaut.bom)
+    implementation libs.bundles.micronaut
+
+    // Ensure that the versions defined in deps.toml are used
+    // instead of versions from transitive dependencies
+    implementation (libs.flyway.core) {
+        force = true
+    }
+    implementation (libs.jooq) {
+        force = true
+    }
+
     implementation project(':airbyte-config:init')
     implementation project(':airbyte-config:config-models')
     implementation project(':airbyte-config:config-persistence')
@@ -12,10 +27,13 @@ dependencies {
     implementation project(':airbyte-scheduler:scheduler-persistence')
 
     implementation 'io.temporal:temporal-sdk:1.8.1'
-    implementation libs.flyway.core
+
+    testAnnotationProcessor platform(libs.micronaut.bom)
+    testAnnotationProcessor libs.bundles.micronaut.test.annotation.processor
 
     testImplementation libs.platform.testcontainers.postgresql
     testImplementation 'uk.org.webcompere:system-stubs-jupiter:1.2.0'
+    testImplementation libs.bundles.micronaut.test
 }
 
 application {

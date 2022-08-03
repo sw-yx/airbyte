@@ -5,7 +5,7 @@
 
 from setuptools import find_packages, setup
 
-MAIN_REQUIREMENTS = ["airbyte-cdk~=0.1", "google-analytics-data==0.11.2"]
+MAIN_REQUIREMENTS = ["airbyte-cdk~=0.1", "google-analytics-data==0.11.2", "PyJWT", "cryptography", "requests"]
 
 TEST_REQUIREMENTS = [
     "pytest~=6.1",
